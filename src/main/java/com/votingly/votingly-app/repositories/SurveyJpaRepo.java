@@ -1,6 +1,6 @@
-package com.example.integration4.repositories;
+package com.votingly.votingly-app.repositories;
 
-import com.example.integration4.model.Survey;
+import com.votingly.votingly-app.model.Survey;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SurveyJpaRepo extends JpaRepository<Survey, Integer> {

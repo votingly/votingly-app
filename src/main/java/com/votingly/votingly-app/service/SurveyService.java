@@ -1,7 +1,7 @@
-package com.example.integration4.service;
+package com.votingly.votingly-app.service;
 
-import com.example.integration4.model.Survey;
-import com.example.integration4.repositories.SurveyJpaRepo;
+import com.votingly.votingly-app.model.Survey;
+import com.votingly.votingly-app.repositories.SurveyJpaRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
-package com.example.integration4.controller;
+package com.votingly.votingly-app.controller;
 
-import com.example.integration4.service.SurveyService;
+import com.votingly.votingly-app.service.SurveyService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

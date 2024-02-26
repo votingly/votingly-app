@@ -1,4 +1,4 @@
-package com.example.integration4.model;
+package com.votingly.votingly-app.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
