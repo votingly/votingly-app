@@ -1,4 +1,4 @@
-package com.example.integration4;
+package com.votingly.votingly-app;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
