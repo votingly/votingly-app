@@ -1,5 +1,6 @@
 package com.votingly.votingly-app.service;
 
+import com.votingly.votingly-app.controller.api.dto.QuestionDto;
 import com.votingly.votingly-app.model.Form;
 import com.votingly.votingly-app.repositories.FormJpaRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,5 +19,13 @@ public class FormService {
 
     public List<Form> getAllForms() {
         return FormJpaRepo.findAll();
+    }
+
+    public Form getForm(long formId) {
+        return FormJpaRepo.findById(formId);
+    }
+
+    public List<QuestionDto> getQuestionsOfForm(long formId) {
+        return FormJpaRepo.getQuestionsOfForm(formId);
     }
 }
