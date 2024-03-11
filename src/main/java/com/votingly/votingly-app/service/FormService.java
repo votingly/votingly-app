@@ -1,7 +1,7 @@
 package com.votingly.votingly-app.service;
 
 import com.votingly.votingly-app.model.Form;
-import com.votingly.votingly-app.repositories.FormJpaRepo;
+import com.votingly.votingly-app.repositories.FormRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,13 +10,22 @@ import java.util.List;
 @Service
 public class FormService {
 
-    private final FormJpaRepo FormJpaRepo;
+    private final FormRepository FormJpaRepo;
 
-    public FormService(FormJpaRepo FormJpaRepo) {
+    @Autowired
+    public FormService(FormRepository FormJpaRepo) {
         this.FormJpaRepo = FormJpaRepo;
     }
 
     public List<Form> getAllForms() {
         return FormJpaRepo.findAll();
+    }
+
+    public Form getForm(long formId) {
+        return FormJpaRepo.findById(formId);
+    }
+
+    public Form getQuestionOfForm(long formId) {
+        return FormJpaRepo.getQuestionOfForm(formId).orElse(null);
     }
 }
