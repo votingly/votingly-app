@@ -3,6 +3,7 @@ package com.votingly.votingly-app.controller.api;
 import com.votingly.votingly-app.controller.api.dto.FormDto;
 import com.votingly.votingly-app.controller.api.dto.QuestionDto;
 import com.votingly.votingly-app.model.Form;
+import com.votingly.votingly-app.model.Question;
 import com.votingly.votingly-app.service.FormService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,10 +35,15 @@ public class FormsController {
 
 
     @GetMapping("/{id}/questions")
-    List<QuestionDto> getQuestionsOfForm(@PathVariable("id") long formId) {
-        return formService.getQuestionsOfForm(formId)
+    ResponseEntity<List<QuestionDto>> getQuestionsOfForm(@PathVariable("id") long formId) {
+        var form = formService.getQuestionOfForm(formId);
+        if (form == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity.ok(form.getQuestions()
                 .stream()
-                .map(questionDto -> modelMapper.map(questionDto, QuestionDto.class))
-                .toList();
+                .map(Question::getForm)
+                .map(dev -> modelMapper.map(dev, QuestionDto.class))
+                .toList());
     }
 }
