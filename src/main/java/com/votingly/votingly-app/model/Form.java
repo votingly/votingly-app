@@ -1,9 +1,9 @@
 package com.votingly.votingly-app.model;
 
+import com.votingly.votingly-app.model.question.Question;
 import jakarta.persistence.*;
 
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "form")
