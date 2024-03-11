@@ -2,8 +2,7 @@ package com.votingly.votingly-app.controller.api;
 
 import com.votingly.votingly-app.controller.api.dto.FormDto;
 import com.votingly.votingly-app.controller.api.dto.QuestionDto;
-import com.votingly.votingly-app.model.Form;
-import com.votingly.votingly-app.model.Question;
+import com.votingly.votingly-app.model.question.Question;
 import com.votingly.votingly-app.service.FormService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController

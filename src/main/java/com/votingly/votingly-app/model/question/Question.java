@@ -1,5 +1,7 @@
-package com.votingly.votingly-app.model;
+package com.votingly.votingly-app.model.question;
 
+import com.votingly.votingly-app.model.Form;
+import com.votingly.votingly-app.model.QuestionType;
 import jakarta.persistence.*;
 
 @Entity
