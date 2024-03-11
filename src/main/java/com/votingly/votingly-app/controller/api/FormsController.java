@@ -2,6 +2,7 @@ package com.votingly.votingly-app.controller.api;
 
 import com.votingly.votingly-app.controller.api.dto.FormDto;
 import com.votingly.votingly-app.controller.api.dto.QuestionDto;
+import com.votingly.votingly-app.model.Form;
 import com.votingly.votingly-app.model.question.Question;
 import com.votingly.votingly-app.service.FormService;
 import org.modelmapper.ModelMapper;
@@ -11,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/forms")
@@ -34,14 +37,18 @@ public class FormsController {
 
     @GetMapping("/{id}/questions")
     ResponseEntity<List<QuestionDto>> getQuestionsOfForm(@PathVariable("id") long formId) {
-        var form = formService.getQuestionOfForm(formId);
-        if (form == null) {
+        Optional<Form> optionalForm = Optional.ofNullable(formService.getQuestionOfForm(formId));
+        if (optionalForm.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return ResponseEntity.ok(form.getQuestions()
+
+        Form form = optionalForm.get();
+
+        List<QuestionDto> questionDtos = form.getQuestions()
                 .stream()
-                .map(Question::getForm)
-                .map(dev -> modelMapper.map(dev, QuestionDto.class))
-                .toList());
+                .map(question -> modelMapper.map(question, QuestionDto.class))
+                .toList();
+
+        return ResponseEntity.ok(questionDtos);
     }
 }
