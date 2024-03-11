@@ -1,9 +1,11 @@
 package com.votingly.votingly-app.model.question;
 
 import com.votingly.votingly-app.model.QuestionType;
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 
 @Entity
+@DiscriminatorValue("OPEN")
 public class OpenQuestion extends Question {
 
     public OpenQuestion() {
