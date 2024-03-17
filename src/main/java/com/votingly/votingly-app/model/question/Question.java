@@ -1,6 +1,6 @@
 package com.votingly.votingly-app.model.question;
 
-import com.votingly.votingly-app.model.Form;
+import com.votingly.votingly-app.model.survey.Survey;
 import com.votingly.votingly-app.model.QuestionType;
 import jakarta.persistence.*;
 
@@ -21,8 +21,8 @@ public class Question {
     QuestionType questionType;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "form_id", nullable = false)
-    private Form form;
+    @JoinColumn(name = "survey_id", nullable = false)
+    private Survey survey;
 
     public Question() {
     }
@@ -57,11 +57,11 @@ public class Question {
         this.questionType = questionType;
     }
 
-    public Form getForm() {
-        return form;
+    public Survey getForm() {
+        return survey;
     }
 
-    public void setForm(Form form) {
-        this.form = form;
+    public void setForm(Survey survey) {
+        this.survey = survey;
     }
 }

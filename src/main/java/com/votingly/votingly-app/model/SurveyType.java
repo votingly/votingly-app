@@ -1,5 +1,5 @@
 package com.votingly.votingly-app.model;
 
-public enum FormType {
+public enum SurveyType {
     LINEAR, CIRCULAR
 }
