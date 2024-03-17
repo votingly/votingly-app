@@ -1,9 +1,8 @@
-package com.votingly.votingly-app.model.survey;
+package com.votingly.votingly-app.model;
 
-import com.votingly.votingly-app.model.SurveyType;
-import com.votingly.votingly-app.model.question.Question;
 import jakarta.persistence.*;
 
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -23,6 +22,16 @@ public class Survey {
 
     @OneToMany(mappedBy = "survey")
     private List<Question> questions;
+
+    private Date startDate;
+    private Date endDate;
+    private boolean isPublished;
+    private boolean isDefault;
+    private boolean isAllowedOnlyOnce;
+    private long userId;
+    private int timeSpent;
+    private Date submitDate;
+
 
     // Constructors, getters, and setters
     public Survey() {

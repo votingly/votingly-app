@@ -2,7 +2,7 @@ package com.votingly.votingly-app.controller.api;
 
 import com.votingly.votingly-app.controller.api.dto.SurveyDto;
 import com.votingly.votingly-app.controller.api.dto.QuestionDto;
-import com.votingly.votingly-app.model.survey.Survey;
+import com.votingly.votingly-app.model.Survey;
 import com.votingly.votingly-app.service.SurveyService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

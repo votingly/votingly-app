@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.votingly.votingly-app.model.survey.Survey;
+import com.votingly.votingly-app.model.Survey;
 
 // @RunWith(SpringRunner.class)
 @SpringBootTest

@@ -1,6 +1,6 @@
 package com.votingly.votingly-app.service;
 
-import com.votingly.votingly-app.model.survey.Survey;
+import com.votingly.votingly-app.model.Survey;
 import com.votingly.votingly-app.repositories.SurveyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
 package com.votingly.votingly-app.repositories;
 
-import com.votingly.votingly-app.model.survey.Survey;
+import com.votingly.votingly-app.model.Survey;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
