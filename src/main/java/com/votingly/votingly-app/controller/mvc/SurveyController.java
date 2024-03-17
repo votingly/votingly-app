@@ -1,6 +1,6 @@
 package com.votingly.votingly-app.controller.mvc;
 
-import com.votingly.votingly-app.service.FormService;
+import com.votingly.votingly-app.service.SurveyService;
 import com.votingly.votingly-app.service.QuestionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,25 +10,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/surveys")
-public class FormController {
+public class SurveyController {
 
-    private final FormService formService;
-    private final QuestionService questionService;
+    private final SurveyService surveyService;
 
-    public FormController(FormService formService, QuestionService questionService) {
-        this.formService = formService;
-        this.questionService = questionService;
+    public SurveyController(SurveyService surveyService) {
+        this.surveyService = surveyService;
     }
 
     @GetMapping
-    public String form(Model model) {
+    public String survey() {
         return "surveys";
     }
 
     @GetMapping("/{id}/questions")
     public String getSurvey(@PathVariable("id") long id, Model model) {
-        model.addAttribute("survey", formService.getForm(id));
-        model.addAttribute("question", formService.getQuestionOfForm(id));
+        model.addAttribute("survey", surveyService.getSurvey(id));
+        model.addAttribute("question", surveyService.getQuestionOfSurvey(id));
         return "survey";
     }
 }
