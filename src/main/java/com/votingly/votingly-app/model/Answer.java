@@ -2,8 +2,6 @@ package com.votingly.votingly-app.model;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Answer {
