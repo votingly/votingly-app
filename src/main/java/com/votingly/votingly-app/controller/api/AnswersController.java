@@ -3,18 +3,11 @@ package com.votingly.votingly-app.controller.api;
 import com.votingly.votingly-app.controller.api.dto.AnswerDto;
 import com.votingly.votingly-app.controller.api.dto.NewOpenAnswer;
 import org.modelmapper.ModelMapper;
-import com.votingly.votingly-app.model.Answer;
-import com.votingly.votingly-app.model.OpenAnswer;
-import com.votingly.votingly-app.model.Question;
-import com.votingly.votingly-app.model.QuestionType;
 import com.votingly.votingly-app.service.AnswerService;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.PersistenceContextType;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -34,15 +27,15 @@ public class AnswersController {
             @RequestBody @Valid NewOpenAnswer newOpenAnswer,
             @PathVariable long questionId) {
 
-//        if (openAnswer != null) {
-        var newAnswer = answerService.save(
-                newOpenAnswer.getAnswer()
-        );
+//        var newAnswer = answerService.save(
+//                newOpenAnswer.getAnswer()
+//        );
+        AnswerDto newAnswer = answerService.save(newOpenAnswer);
+
         return new ResponseEntity<>(
                 modelMapper.map(newAnswer, AnswerDto.class),
                 HttpStatus.CREATED
         );
-//        }
 
     }
 }
