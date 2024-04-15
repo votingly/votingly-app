@@ -1,5 +1,6 @@
 package com.votingly.votingly-app.service;
 
+import com.votingly.votingly-app.controller.api.dto.NewOpenAnswer;
 import com.votingly.votingly-app.model.Answer;
 import com.votingly.votingly-app.model.OpenAnswer;
 import com.votingly.votingly-app.model.Question;
@@ -18,8 +19,8 @@ public class AnswerService {
         this.answerRepository = answerRepository;
     }
 
-    public OpenAnswer save(String answer) {
-        var answerEntity = new OpenAnswer(answer);
-        return answerRepository.save(answerEntity);
+    public OpenAnswer save(OpenAnswer answer) {
+        // var answerEntity = new OpenAnswer(answer);
+        return answerRepository.save(answer);
     }
 }

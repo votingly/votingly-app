@@ -34,3 +34,10 @@ spring:
     password: '1234'
     username: 'postgres'
     url: 'jdbc:postgresql://votingly-db:5432/votingly'
+
+logging:
+  level:
+    root: WARN
+  be:
+    kdg:
+      team9: TRACE
