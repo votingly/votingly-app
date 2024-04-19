@@ -3,9 +3,12 @@ package com.votingly.votingly-app.repositories;
 import com.votingly.votingly-app.model.Survey;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
+
 @Repository
 public interface SurveyRepository extends JpaRepository<Survey, Long> {
     Survey findBySurveyId(long surveyId);
@@ -16,4 +19,7 @@ public interface SurveyRepository extends JpaRepository<Survey, Long> {
             where question.survey.surveyId = :surveyId
              """)
     Optional<Survey> getQuestionOfSurvey(long surveyId);
+
+    @Query("SELECT q.id FROM Question q WHERE q.survey.surveyId = :surveyId")
+    List<Long> getQuestionIdsBySurveyId(@Param("surveyId") Long surveyId);
 }
