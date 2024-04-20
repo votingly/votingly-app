@@ -14,5 +14,19 @@ services:
       - POSTGRES_PASSWORD=1234
       - POSTGRES_DB=votingly
 
+  votingly-test-db:
+    container_name: votingly-test-db
+    image: postgres:16.1-alpine
+    restart: unless-stopped
+    ports:
+      - 5331:5432
+    volumes:
+      - pgdata_test:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=votingly
+
 volumes:
   pgdata:
+  pgdata_test:
