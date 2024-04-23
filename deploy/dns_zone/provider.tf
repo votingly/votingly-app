@@ -12,5 +12,5 @@ provider "google" {
   project     = "votingly"
   region      = "europe-west1"
   zone        = "europe-west1-b"
-  credentials = file(".creds/gcloud_sa_votingly-d37d67903f23.json")
+  credentials = file("../.creds/gcloud_sa-testing-terraform_votingly-d37d67903f23.json")
 }
