@@ -1,7 +1,7 @@
 //package com.votingly.votingly-app.controller.api;
 //
 //import com.votingly.votingly-app.controller.api.dto.OptionDto;
-//import com.votingly.votingly-app.controller.api.dto.QuestionDto;
+//import com.votingly.votingly-app.controller.api.dto.questions.QuestionDto;
 //import com.votingly.votingly-app.model.ChoiceQuestion;
 //import com.votingly.votingly-app.service.OptionService;
 //import org.modelmapper.ModelMapper;

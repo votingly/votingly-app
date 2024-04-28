@@ -1,6 +1,8 @@
-package com.votingly.votingly-app.controller.api.dto;
+package com.votingly.votingly-app.controller.api.dto.questions;
 
+import com.votingly.votingly-app.controller.api.dto.OptionDto;
 import com.votingly.votingly-app.model.Option;
+import com.votingly.votingly-app.model.Question;
 import com.votingly.votingly-app.model.QuestionType;
 // import jakarta.persistence.Column;
 // import jakarta.persistence.EnumType;
@@ -15,36 +17,24 @@ public class QuestionDto {
 
     private QuestionType questionType;
 
-    long surveyId;
-
-    private int min;
-    private int max;
-    private int step;
-
-    private boolean isMultiChoice;
-    private List<OptionDto> options;
+    private long surveyId;
 
 
     public QuestionDto() {
     }
 
-    public QuestionDto(long id,
-                       String questionName,
-                       QuestionType questionType,
-                       long surveyId,
-                       int min, int max,
-                       int step,
-                       boolean isMultiChoice,
-                       List<OptionDto> options) {
+    public QuestionDto(long id, String questionName, QuestionType questionType, long surveyId) {
         this.id = id;
         this.questionName = questionName;
         this.questionType = questionType;
         this.surveyId = surveyId;
-        this.min = min;
-        this.max = max;
-        this.step = step;
-        this.isMultiChoice = isMultiChoice;
-        this.options = options;
+    }
+
+    public QuestionDto(Question question) {
+        this.id = question.getId();
+        this.questionName = question.getQuestionName();
+        this.questionType = question.getQuestionType();
+        this.surveyId = question.getSurvey().getSurveyId();
     }
 
     public long getId() {
@@ -79,43 +69,4 @@ public class QuestionDto {
         this.surveyId = surveyId;
     }
 
-    public int getMin() {
-        return min;
-    }
-
-    public void setMin(int min) {
-        this.min = min;
-    }
-
-    public int getMax() {
-        return max;
-    }
-
-    public void setMax(int max) {
-        this.max = max;
-    }
-
-    public int getStep() {
-        return step;
-    }
-
-    public void setStep(int step) {
-        this.step = step;
-    }
-
-    public boolean isMultiChoice() {
-        return isMultiChoice;
-    }
-
-    public void setMultiChoice(boolean multiChoice) {
-        isMultiChoice = multiChoice;
-    }
-
-    public List<OptionDto> getOptions() {
-        return options;
-    }
-
-    public void setOptions(List<OptionDto> options) {
-        this.options = options;
-    }
 }

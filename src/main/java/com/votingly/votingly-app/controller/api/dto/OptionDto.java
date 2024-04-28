@@ -1,6 +1,7 @@
 package com.votingly.votingly-app.controller.api.dto;
 
 import com.votingly.votingly-app.model.ChoiceQuestion;
+import com.votingly.votingly-app.model.Option;
 
 public class OptionDto {
 
@@ -18,6 +19,10 @@ public class OptionDto {
         this.optionText = optionText;
         this.question = question;
     }
+
+    public OptionDto(Option option) {
+    }
+
 
     public long getOptionId() {
         return optionId;
