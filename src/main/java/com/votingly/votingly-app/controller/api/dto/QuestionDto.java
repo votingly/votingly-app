@@ -1,9 +1,9 @@
 package com.votingly.votingly-app.controller.api.dto;
 
 import com.votingly.votingly-app.model.QuestionType;
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+// import jakarta.persistence.Column;
+// import jakarta.persistence.EnumType;
+// import jakarta.persistence.Enumerated;
 
 public class QuestionDto {
     private long id;
