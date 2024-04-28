@@ -2,9 +2,9 @@ package com.votingly.votingly-app.controller.api.dto;
 
 import com.votingly.votingly-app.model.Option;
 import com.votingly.votingly-app.model.QuestionType;
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+// import jakarta.persistence.Column;
+// import jakarta.persistence.EnumType;
+// import jakarta.persistence.Enumerated;
 
 import java.util.List;
 
