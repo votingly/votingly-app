@@ -1,20 +1,20 @@
 package com.votingly.votingly-app.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+// import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.List;
+// import java.util.List;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+// import org.junit.jupiter.api.Test;
+// import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.votingly.votingly-app.model.Survey;
+// import com.votingly.votingly-app.model.Survey;
 
 // @RunWith(SpringRunner.class)
 @SpringBootTest
 public class SurveyServiceUnitTest {
-    @Autowired
-    private SurveyService surveyService;
+    // @Autowired
+    // private SurveyService surveyService;
     
     // @Test
     // public void whenApplicationStarts_thenHibernateCreatesInitialRecords() {
