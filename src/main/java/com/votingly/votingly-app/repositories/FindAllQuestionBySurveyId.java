@@ -4,6 +4,6 @@ import com.votingly.votingly-app.model.Question;
 
 import java.util.List;
 
-public interface FindAllQuestionBySurveyIdRepo {
+public interface FindAllQuestionBySurveyId {
     List<Question> findAllBySurveyIdFetched(Long id);
 }

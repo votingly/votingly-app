@@ -2,7 +2,8 @@ package com.votingly.votingly-app.controller.api;
 
 import com.votingly.votingly-app.controller.api.dto.SurveyDto;
 import com.votingly.votingly-app.controller.api.dto.QuestionDto;
-import com.votingly.votingly-app.model.Survey;
+import com.votingly.votingly-app.model.Question;
+import com.votingly.votingly-app.service.QuestionService;
 import com.votingly.votingly-app.service.SurveyService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,17 +12,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/surveys")
 public class SurveysController {
-    private SurveyService surveyService;
-    private ModelMapper modelMapper;
+    private final SurveyService surveyService;
+    private final QuestionService questionService;
+    private final ModelMapper modelMapper;
 
     @Autowired
-    public SurveysController(SurveyService surveyService, ModelMapper modelMapper) {
+    public SurveysController(SurveyService surveyService, QuestionService questionService, ModelMapper modelMapper) {
         this.surveyService = surveyService;
+        this.questionService = questionService;
         this.modelMapper = modelMapper;
     }
 
@@ -34,18 +36,32 @@ public class SurveysController {
 
 
     @GetMapping("/{id}/questions")
-    ResponseEntity<List<QuestionDto>> getQuestionsOfForm(@PathVariable("id") long surveyId) {
-        Optional<Survey> optionalSurvey = Optional.ofNullable(surveyService.getQuestionOfSurvey(surveyId));
-        if (optionalSurvey.isEmpty()) {
+//    ResponseEntity<List<QuestionDto>> getQuestionsOfForm(@PathVariable("id") long surveyId) {
+//        Optional<Survey> optionalSurvey = Optional.ofNullable(surveyService.getQuestionOfSurvey(surveyId));
+//        if (optionalSurvey.isEmpty()) {
+//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//        }
+//        Survey survey = optionalSurvey.get();
+//
+//        List<QuestionDto> questionDtos = survey.getQuestions()
+//                .stream()
+//                .map(question -> modelMapper.map(question, QuestionDto.class))
+//                .toList();
+//
+//        return ResponseEntity.ok(questionDtos);
+//    }
+    ResponseEntity<List<QuestionDto>> getQuestionsOfSurvey(@PathVariable("id") long surveyId) {
+        List<Question> questions = questionService.findAllQuestionById(surveyId);
+        if (questions.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        Survey survey = optionalSurvey.get();
 
-        List<QuestionDto> questionDtos = survey.getQuestions()
+        List<QuestionDto> questionDtos = questions
                 .stream()
                 .map(question -> modelMapper.map(question, QuestionDto.class))
                 .toList();
 
         return ResponseEntity.ok(questionDtos);
+
     }
 }
