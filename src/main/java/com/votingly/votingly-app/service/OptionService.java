@@ -1,7 +1,5 @@
 package com.votingly.votingly-app.service;
 
-import com.votingly.votingly-app.model.Question;
-import com.votingly.votingly-app.repositories.FindAllQuestionBySurveyId;
 import com.votingly.votingly-app.repositories.OptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
