@@ -8,7 +8,6 @@ import com.votingly.votingly-app.model.ChoiceQuestion;
 import com.votingly.votingly-app.model.Option;
 import com.votingly.votingly-app.model.Question;
 import com.votingly.votingly-app.model.RangeQuestion;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.stream.Collectors;
 

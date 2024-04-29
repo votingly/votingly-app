@@ -2,6 +2,7 @@ package com.votingly.votingly-app.service;
 
 // import com.votingly.votingly-app.controller.api.dto.AnswerDto;
 // import com.votingly.votingly-app.controller.api.dto.NewOpenAnswer;
+
 import com.votingly.votingly-app.model.Answer;
 import com.votingly.votingly-app.model.OpenAnswer;
 import com.votingly.votingly-app.model.Question;
@@ -16,11 +17,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class AnswerService {
     private final AnswerRepository answerRepository;
-    private final ModelMapper modelMapper;
 
-    public AnswerService(AnswerRepository answerRepository, ModelMapper modelMapper) {
+    public AnswerService(AnswerRepository answerRepository) {
         this.answerRepository = answerRepository;
-        this.modelMapper = modelMapper;
     }
 
     @Transactional
