@@ -1,6 +1,9 @@
 package com.votingly.votingly-app.model;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+
+import java.util.Collection;
 
 @Entity
 @Table(name = "user_table")
@@ -40,6 +43,8 @@ public class User {
         this.email = email;
         this.password = password;
     }
+
+
 
     public String getFirstName() {
         return firstName;
