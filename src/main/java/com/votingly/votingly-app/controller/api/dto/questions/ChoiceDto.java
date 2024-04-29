@@ -2,7 +2,6 @@ package com.votingly.votingly-app.controller.api.dto.questions;
 
 import com.votingly.votingly-app.controller.api.dto.OptionDto;
 import com.votingly.votingly-app.model.ChoiceQuestion;
-import com.votingly.votingly-app.model.Option;
 import com.votingly.votingly-app.model.QuestionType;
 
 import java.util.List;
@@ -15,12 +14,9 @@ public class ChoiceDto extends QuestionDto {
 
     public ChoiceDto() {
     }
+
     public ChoiceDto(ChoiceQuestion question) {
         super(question.getId(), question.getQuestionName(), question.getQuestionType(), question.getSurvey().getSurveyId());
-        this.isMultiChoice = question.isMultiChoice();
-        this.options = question.getOptions().stream()
-                .map(option -> new OptionDto(option.getOptionId(), option.getOptionText(), option.getQuestion()))
-                .collect(Collectors.toList());
     }
 
     public ChoiceDto(long id, String questionName, QuestionType questionType, long surveyId, boolean isMultiChoice, List<OptionDto> options) {
