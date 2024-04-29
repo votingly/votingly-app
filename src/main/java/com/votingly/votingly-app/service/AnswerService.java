@@ -1,7 +1,7 @@
 package com.votingly.votingly-app.service;
 
-// import com.votingly.votingly-app.controller.api.dto.AnswerDto;
-// import com.votingly.votingly-app.controller.api.dto.NewOpenAnswer;
+// import com.votingly.votingly-app.controller.api.dto.answer.AnswerDto;
+// import com.votingly.votingly-app.controller.api.dto.answer.NewOpenAnswer;
 
 import com.votingly.votingly-app.model.Answer;
 import com.votingly.votingly-app.model.OpenAnswer;

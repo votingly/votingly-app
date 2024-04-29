@@ -1,17 +1,25 @@
 package com.votingly.votingly-app.converters;
 
-import com.votingly.votingly-app.controller.api.dto.OptionDto;
+import com.votingly.votingly-app.controller.api.dto.questions.OptionDto;
 import com.votingly.votingly-app.controller.api.dto.questions.ChoiceDto;
 import com.votingly.votingly-app.controller.api.dto.questions.QuestionDto;
 import com.votingly.votingly-app.controller.api.dto.questions.RangeDto;
 import com.votingly.votingly-app.model.ChoiceQuestion;
-import com.votingly.votingly-app.model.Option;
 import com.votingly.votingly-app.model.Question;
 import com.votingly.votingly-app.model.RangeQuestion;
 
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class QuestionDtoConverter {
+
+//    public QuestionDtoConverter(Function<Question, QuestionDto> fromDto, Function<QuestionDto, Question> fromEntity) {
+//        super(fromDto, fromEntity);
+//    }
+//
+//    private static QuestionDto convertToDto(Question question) {
+//        return new QuestionDto(question.getId(), question.getQuestionName(), question.getQuestionType(), question.getSurvey().getSurveyId());
+//    }
 
     public QuestionDto convert(Question question) {
 

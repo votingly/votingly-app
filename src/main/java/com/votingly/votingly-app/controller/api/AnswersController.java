@@ -1,7 +1,7 @@
 package com.votingly.votingly-app.controller.api;
 
-import com.votingly.votingly-app.controller.api.dto.AnswerDto;
-import com.votingly.votingly-app.controller.api.dto.NewOpenAnswer;
+import com.votingly.votingly-app.controller.api.dto.answer.NewOpenAnswerDto;
+import com.votingly.votingly-app.controller.api.dto.answer.OpenAnswerDto;
 import org.modelmapper.ModelMapper;
 import com.votingly.votingly-app.service.AnswerService;
 import jakarta.validation.Valid;
@@ -23,16 +23,21 @@ public class AnswersController {
     }
 
     @PostMapping("/open")
-    public ResponseEntity<AnswerDto> saveAnswerForQuestion(@RequestBody
-                                                           @Valid NewOpenAnswer openAnswerDto) {
+    public ResponseEntity<OpenAnswerDto> saveAnswerForQuestion(@RequestBody
+                                                           @Valid NewOpenAnswerDto openAnswerDto) {
         var createdAnswer = answerService.save(openAnswerDto.getSurveyId(),
                 openAnswerDto.getUserId(),
                 openAnswerDto.getQuestionId(),
                 openAnswerDto.getAnswer()
         );
         return new ResponseEntity<>(
-                modelMapper.map(createdAnswer, AnswerDto.class),
+                modelMapper.map(createdAnswer, OpenAnswerDto.class),
                 HttpStatus.CREATED
         );
     }
+//    @PostMapping("/{questionId}")
+//    public ResponseEntity<OpenAnswerDto> saveAnswerForQuestion(@RequestBody
+//                                                           @Valid OpenAnswerDto answer){
+//        switch ()
+//    }
 }
