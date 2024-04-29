@@ -4,6 +4,7 @@ import com.votingly.votingly-app.model.Question;
 import com.votingly.votingly-app.repositories.QuestionsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,7 +21,12 @@ public class QuestionService {
         return questionsRepository.findAllQuestions();
     }
 
-    public Question getQuestion(long id){
+    public Question getQuestion(long id) {
         return questionsRepository.findById(id).orElse(null);
+    }
+
+    @Transactional
+    public List<Question> findAllQuestionById(long id) {
+        return questionsRepository.findAllBySurveyIdFetched(id);
     }
 }

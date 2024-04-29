@@ -1,18 +1,24 @@
-package com.votingly.votingly-app.controller.api.dto;
+package com.votingly.votingly-app.controller.api.dto.questions;
 
+import com.votingly.votingly-app.controller.api.dto.OptionDto;
+import com.votingly.votingly-app.model.Option;
+import com.votingly.votingly-app.model.Question;
 import com.votingly.votingly-app.model.QuestionType;
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+// import jakarta.persistence.Column;
+// import jakarta.persistence.EnumType;
+// import jakarta.persistence.Enumerated;
+
+import java.util.List;
 
 public class QuestionDto {
     private long id;
 
     private String questionName;
 
-    QuestionType questionType;
+    private QuestionType questionType;
 
-    long surveyId;
+    private long surveyId;
+
 
     public QuestionDto() {
     }
@@ -22,6 +28,13 @@ public class QuestionDto {
         this.questionName = questionName;
         this.questionType = questionType;
         this.surveyId = surveyId;
+    }
+
+    public QuestionDto(Question question) {
+        this.id = question.getId();
+        this.questionName = question.getQuestionName();
+        this.questionType = question.getQuestionType();
+        this.surveyId = question.getSurvey().getSurveyId();
     }
 
     public long getId() {
@@ -55,4 +68,5 @@ public class QuestionDto {
     public void setSurveyId(long surveyId) {
         this.surveyId = surveyId;
     }
+
 }

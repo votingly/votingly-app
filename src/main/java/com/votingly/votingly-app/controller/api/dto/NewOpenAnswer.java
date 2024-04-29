@@ -1,9 +1,9 @@
 package com.votingly.votingly-app.controller.api.dto;
 
 import com.votingly.votingly-app.model.Question;
-import jakarta.persistence.*;
+// import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+// import jakarta.validation.constraints.NotNull;
 
 public class NewOpenAnswer {
     private long answerId;

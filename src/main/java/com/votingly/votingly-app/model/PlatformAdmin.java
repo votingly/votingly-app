@@ -1,4 +1,4 @@
-package com.votingly.votingly-app.model.user;
+package com.votingly.votingly-app.model;
 
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;

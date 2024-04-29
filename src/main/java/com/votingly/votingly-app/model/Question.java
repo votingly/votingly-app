@@ -1,7 +1,7 @@
 package com.votingly.votingly-app.model;
 
-import com.votingly.votingly-app.model.Survey;
-import com.votingly.votingly-app.model.QuestionType;
+// import com.votingly.votingly-app.model.Survey;
+// import com.votingly.votingly-app.model.QuestionType;
 import jakarta.persistence.*;
 
 import java.util.List;
