@@ -1,12 +1,13 @@
 package com.votingly.votingly-app.service;
 
 import com.votingly.votingly-app.model.Survey;
+import com.votingly.votingly-app.repositories.FindAllQuestionBySurveyId;
 import com.votingly.votingly-app.repositories.SurveyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-// import java.util.Optional;
 
 @Service
 public class SurveyService {
@@ -26,10 +27,7 @@ public class SurveyService {
         return surveyRepository.findBySurveyId(surveyId);
     }
 
-    public Survey getQuestionOfSurvey(long surveyId) {
-        return surveyRepository.getQuestionOfSurvey(surveyId).orElse(null);
-    }
-
+    @Transactional
     public List<Long> getQuestionsOfSurvey(long id) {
         return surveyRepository.getQuestionIdsBySurveyId(id);
     }
