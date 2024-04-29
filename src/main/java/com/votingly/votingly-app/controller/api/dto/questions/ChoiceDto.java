@@ -1,11 +1,9 @@
 package com.votingly.votingly-app.controller.api.dto.questions;
 
-import com.votingly.votingly-app.controller.api.dto.OptionDto;
 import com.votingly.votingly-app.model.ChoiceQuestion;
 import com.votingly.votingly-app.model.QuestionType;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ChoiceDto extends QuestionDto {
 

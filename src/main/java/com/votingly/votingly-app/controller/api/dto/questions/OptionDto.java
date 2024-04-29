@@ -1,4 +1,4 @@
-package com.votingly.votingly-app.controller.api.dto;
+package com.votingly.votingly-app.controller.api.dto.questions;
 
 import com.votingly.votingly-app.model.ChoiceQuestion;
 
