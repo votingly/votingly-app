@@ -1,35 +1,31 @@
-package com.votingly.votingly-app.controller.api.dto;
+package com.votingly.votingly-app.controller.api.dto.answer;
 
 import com.votingly.votingly-app.model.Question;
-// import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-// import jakarta.validation.constraints.NotNull;
 
-public class NewOpenAnswer {
+public class OpenAnswerDto {
     private long answerId;
-    @NotBlank
-    private String answer;
-
     private long surveyId;
     private long userId;
     private Question questionId;
+    private String answer;
 
-    public NewOpenAnswer() {
+    public OpenAnswerDto() {
     }
 
-    public NewOpenAnswer(String answer, long surveyId, long userId, Question questionId) {
-        this.answer = answer;
+    public OpenAnswerDto(long answerId, long surveyId, long userId, Question questionId, String answer) {
+        this.answerId = answerId;
         this.surveyId = surveyId;
         this.userId = userId;
         this.questionId = questionId;
-    }
-
-    public String getAnswer() {
-        return answer;
-    }
-
-    public void setAnswer(String answer) {
         this.answer = answer;
+    }
+
+    public long getAnswerId() {
+        return answerId;
+    }
+
+    public void setAnswerId(long answerId) {
+        this.answerId = answerId;
     }
 
     public long getSurveyId() {
@@ -54,5 +50,13 @@ public class NewOpenAnswer {
 
     public void setQuestionId(Question questionId) {
         this.questionId = questionId;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 }
