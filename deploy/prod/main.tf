@@ -76,6 +76,6 @@ resource "google_compute_instance" "votingly-testing-vm" {
 # }
 
 resource "google_service_account" "vm-secrets" {
-  account_id   = "vm-secrets@votingly.iam.gserviceaccount.com"
+  account_id   = "vm-secrets"
   display_name = "Custom SA for VM Instances to access Secrets"
 }
