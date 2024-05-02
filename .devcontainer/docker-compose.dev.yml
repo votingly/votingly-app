@@ -26,12 +26,12 @@ services:
       - "8082:8080"
 
   # phpMyAdmin database manager
-  votingly-adminer:
-    container_name: votingly-adminer
-    image: dockette/adminer:full
-    restart: always
-    expose:
-      - "8282"
-    ports:
-      - "8282:80"
+  # votingly-adminer:
+  #   container_name: votingly-adminer
+  #   image: dockette/adminer:full
+  #   restart: always
+  #   expose:
+  #     - "8282"
+  #   ports:
+  #     - "8282:80"
 
