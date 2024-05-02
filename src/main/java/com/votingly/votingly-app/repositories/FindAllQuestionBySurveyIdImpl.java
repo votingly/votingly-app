@@ -1,7 +1,7 @@
 package com.votingly.votingly-app.repositories;
 
-import com.votingly.votingly-app.model.ChoiceQuestion;
-import com.votingly.votingly-app.model.Question;
+import com.votingly.votingly-app.model.question.ChoiceQuestion;
+import com.votingly.votingly-app.model.question.Question;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 

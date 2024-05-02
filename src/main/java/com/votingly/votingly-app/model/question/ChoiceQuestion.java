@@ -1,5 +1,6 @@
-package com.votingly.votingly-app.model;
+package com.votingly.votingly-app.model.question;
 
+import com.votingly.votingly-app.model.Option;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;

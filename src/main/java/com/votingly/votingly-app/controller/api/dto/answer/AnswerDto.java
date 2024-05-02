@@ -1,23 +1,34 @@
 package com.votingly.votingly-app.controller.api.dto.answer;
 
-import com.votingly.votingly-app.model.Question;
+import com.votingly.votingly-app.model.Option;
+import com.votingly.votingly-app.model.question.Question;
 
-public class OpenAnswerDto {
+import java.util.List;
+
+public class AnswerDto {
     private long answerId;
     private long surveyId;
     private long userId;
     private Question questionId;
+
     private String answer;
 
-    public OpenAnswerDto() {
+    private List<Option> options;
+
+    private int number;
+
+
+    public AnswerDto() {
     }
 
-    public OpenAnswerDto(long answerId, long surveyId, long userId, Question questionId, String answer) {
+    public AnswerDto(long answerId, long surveyId, long userId, Question questionId, String answer, List<Option> options, int number) {
         this.answerId = answerId;
         this.surveyId = surveyId;
         this.userId = userId;
         this.questionId = questionId;
         this.answer = answer;
+        this.options = options;
+        this.number = number;
     }
 
     public long getAnswerId() {
@@ -58,5 +69,21 @@ public class OpenAnswerDto {
 
     public void setAnswer(String answer) {
         this.answer = answer;
+    }
+
+    public List<Option> getOptions() {
+        return options;
+    }
+
+    public void setOptions(List<Option> options) {
+        this.options = options;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
     }
 }

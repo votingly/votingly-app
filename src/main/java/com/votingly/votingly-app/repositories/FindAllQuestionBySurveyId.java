@@ -1,6 +1,6 @@
 package com.votingly.votingly-app.repositories;
 
-import com.votingly.votingly-app.model.Question;
+import com.votingly.votingly-app.model.question.Question;
 
 import java.util.List;
 

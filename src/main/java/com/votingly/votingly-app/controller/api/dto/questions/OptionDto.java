@@ -1,6 +1,6 @@
 package com.votingly.votingly-app.controller.api.dto.questions;
 
-import com.votingly.votingly-app.model.ChoiceQuestion;
+import com.votingly.votingly-app.model.question.ChoiceQuestion;
 
 public class OptionDto {
 

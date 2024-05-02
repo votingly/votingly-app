@@ -1,7 +1,7 @@
 package com.votingly.votingly-app.controller.mvc;
 
+import com.votingly.votingly-app.model.user.User;
 import com.votingly.votingly-app.controller.api.dto.user.UserDto;
-import com.votingly.votingly-app.model.User;
 import com.votingly.votingly-app.repositories.UserRepository;
 import com.votingly.votingly-app.security.CustomUserDetails;
 import com.votingly.votingly-app.service.UserService;

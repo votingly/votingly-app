@@ -1,11 +1,11 @@
-package com.votingly.votingly-app.model;
+package com.votingly.votingly-app.model.user;
 
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 
 @Entity
 @DiscriminatorValue("P_ADMIN")
-public class PlatformAdmin extends User{
+public class PlatformAdmin extends User {
     public PlatformAdmin() {
     }
 

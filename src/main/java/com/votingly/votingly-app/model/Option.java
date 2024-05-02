@@ -1,5 +1,7 @@
 package com.votingly.votingly-app.model;
 
+import com.votingly.votingly-app.model.answers.ChoiceAnswer;
+import com.votingly.votingly-app.model.question.ChoiceQuestion;
 import jakarta.persistence.*;
 
 @Entity
@@ -16,6 +18,9 @@ public class Option {
     @JoinColumn(name = "question", nullable = false)
     private ChoiceQuestion question;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private ChoiceAnswer answer;
+
     public Option() {
     }
 
@@ -24,7 +29,6 @@ public class Option {
         this.optionText = optionText;
         this.question = question;
     }
-
 
 
     public long getOptionId() {

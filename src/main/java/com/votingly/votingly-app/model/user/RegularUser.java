@@ -1,5 +1,6 @@
-package com.votingly.votingly-app.model;
+package com.votingly.votingly-app.model.user;
 
+import com.votingly.votingly-app.model.Survey;
 import jakarta.persistence.*;
 
 import java.util.List;
