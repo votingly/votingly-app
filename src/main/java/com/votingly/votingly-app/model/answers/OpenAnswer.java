@@ -1,5 +1,6 @@
-package com.votingly.votingly-app.model;
+package com.votingly.votingly-app.model.answers;
 
+import com.votingly.votingly-app.model.question.Question;
 import jakarta.persistence.Entity;
 import jakarta.persistence.DiscriminatorValue;
 
@@ -14,6 +15,7 @@ public class OpenAnswer extends Answer {
     public OpenAnswer(String answer) {
         this.answer = answer;
     }
+
 
     public OpenAnswer(long surveyId, long userId, Question question, String answer) {
         super(surveyId, userId, question);

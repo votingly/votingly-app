@@ -1,20 +1,19 @@
 package com.votingly.votingly-app.service;
 
-// import com.votingly.votingly-app.controller.api.dto.answer.AnswerDto;
-// import com.votingly.votingly-app.controller.api.dto.answer.NewOpenAnswer;
-
-import com.votingly.votingly-app.model.Answer;
-import com.votingly.votingly-app.model.OpenAnswer;
-import com.votingly.votingly-app.model.Question;
-// import com.votingly.votingly-app.model.Survey;
+import com.votingly.votingly-app.model.Option;
+import com.votingly.votingly-app.model.answers.Answer;
+import com.votingly.votingly-app.model.answers.ChoiceAnswer;
+import com.votingly.votingly-app.model.answers.OpenAnswer;
+import com.votingly.votingly-app.model.question.Question;
+import com.votingly.votingly-app.model.answers.RangeAnswer;
 import com.votingly.votingly-app.repositories.AnswerRepository;
-// import jakarta.persistence.PersistenceContext;
-// import jakarta.persistence.PersistenceContextType;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
+@Transactional
 public class AnswerService {
     private final AnswerRepository answerRepository;
 
@@ -22,10 +21,22 @@ public class AnswerService {
         this.answerRepository = answerRepository;
     }
 
-    @Transactional
-    public Answer save(long surveyId, long userId, Question question, String answer) {
-        var answerEntity = new OpenAnswer(surveyId, userId, question, answer);
+    public Answer saveOpen(long surveyId, long userId, Question question, String answer) {
+        var openAnswerEntity = new OpenAnswer(surveyId, userId, question, answer);
 
-        return answerRepository.save(answerEntity);
+        return answerRepository.save(openAnswerEntity);
     }
+
+    public Answer saveRange(long surveyId, long userId, Question question, int number) {
+        var rangeAnswerEntity = new RangeAnswer(surveyId, userId, question, number);
+
+        return answerRepository.save(rangeAnswerEntity);
+    }
+
+    public Answer saveChoice(long surveyId, long userId, Question question, List<Option> options) {
+        var choiceAnswerEntity = new ChoiceAnswer(surveyId, userId, question, options);
+
+        return answerRepository.save(choiceAnswerEntity);
+    }
+
 }

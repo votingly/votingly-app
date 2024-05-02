@@ -1,4 +1,4 @@
-package com.votingly.votingly-app.model;
+package com.votingly.votingly-app.model.user;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
@@ -6,7 +6,7 @@ import jakarta.persistence.Entity;
 
 @Entity
 @DiscriminatorValue("ORG_ADMIN")
-public class OrgAdmin extends User{
+public class OrgAdmin extends User {
     @Column
     private long orgId;
 

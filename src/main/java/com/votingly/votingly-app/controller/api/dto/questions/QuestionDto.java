@@ -1,7 +1,7 @@
 package com.votingly.votingly-app.controller.api.dto.questions;
 
-import com.votingly.votingly-app.model.Question;
-import com.votingly.votingly-app.model.QuestionType;
+import com.votingly.votingly-app.model.question.Question;
+import com.votingly.votingly-app.model.question.QuestionType;
 // import jakarta.persistence.Column;
 // import jakarta.persistence.EnumType;
 // import jakarta.persistence.Enumerated;

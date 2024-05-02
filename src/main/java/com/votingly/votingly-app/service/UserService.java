@@ -1,6 +1,6 @@
 package com.votingly.votingly-app.service;
 
-import com.votingly.votingly-app.model.User;
+import com.votingly.votingly-app.model.user.User;
 import com.votingly.votingly-app.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 

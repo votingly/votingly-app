@@ -1,6 +1,6 @@
 package com.votingly.votingly-app.controller.mvc;
 
-import com.votingly.votingly-app.model.User;
+import com.votingly.votingly-app.model.user.User;
 import com.votingly.votingly-app.repositories.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;

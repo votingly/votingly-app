@@ -1,4 +1,4 @@
-package com.votingly.votingly-app.model;
+package com.votingly.votingly-app.model.question;
 
 public enum QuestionType {
     OPEN, CHOICE, RANGE

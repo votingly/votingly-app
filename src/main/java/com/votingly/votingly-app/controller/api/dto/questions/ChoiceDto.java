@@ -1,7 +1,7 @@
 package com.votingly.votingly-app.controller.api.dto.questions;
 
-import com.votingly.votingly-app.model.ChoiceQuestion;
-import com.votingly.votingly-app.model.QuestionType;
+import com.votingly.votingly-app.model.question.ChoiceQuestion;
+import com.votingly.votingly-app.model.question.QuestionType;
 
 import java.util.List;
 

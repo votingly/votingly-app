@@ -1,4 +1,4 @@
-package com.votingly.votingly-app.model;
+package com.votingly.votingly-app.model.user;
 
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
