@@ -14,5 +14,5 @@ provider "google" {
   project     = "votingly"
   region      = "europe-west1"
   zone        = "europe-west1-b"
-  credentials = var.gcp_sa_credentials
+  credentials = join("/", [var.project_root, var.gcp_sa_credentials])
 }
