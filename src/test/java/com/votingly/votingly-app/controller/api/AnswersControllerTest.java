@@ -1,7 +1,5 @@
 package com.votingly.votingly-app.controller.api;
 
-import com.votingly.votingly-app.controller.api.dto.answer.AnswerDto;
-import com.votingly.votingly-app.controller.api.dto.answer.NewAnswerDto;
 import com.votingly.votingly-app.model.Option;
 import com.votingly.votingly-app.model.answers.ChoiceAnswer;
 import com.votingly.votingly-app.model.answers.OpenAnswer;
@@ -59,7 +57,7 @@ class AnswersControllerTest {
                         .accept(MediaType.APPLICATION_JSON)
                         .with(csrf())
                         .content(objectMapper.writeValueAsString(new RangeAnswer(
-                                "2"
+                                2
                         ))))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.number").value(2))
