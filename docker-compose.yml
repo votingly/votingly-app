@@ -27,6 +27,20 @@ services:
       - POSTGRES_PASSWORD=1234
       - POSTGRES_DB=votingly
 
+  votingly-dwh:
+    container_name: votingly-dwh
+    image: postgres:15.5-alpine3.17
+    restart: unless-stopped
+    ports:
+      - 5433:5432
+    volumes:
+      - pgdata_dwh:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=datawarehouse
+
 volumes:
   pgdata:
   pgdata_test:
+  pgdata_dwh:
