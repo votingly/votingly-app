@@ -16,8 +16,7 @@ ln -sf /var/lib/google/docker-compose ~/.docker/cli-plugins/docker-compose
 # docker compose version
 
 # Login to gitlab registry
-# docker login registry.gitlab.com -u votingly-deploy-token --password-stdin <<< $(docker run -ti google/cloud-sdk:alpine gcloud secrets versions access latest --secret="GITLAB_DEPLOY_TOKEN" --project votingly)
-docker run -ti google/cloud-sdk:alpine gcloud secrets versions access latest --secret="GITLAB_DEPLOY_TOKEN" --project votingly | docker login registry.gitlab.com -u votingly-deploy-token --password-stdin
+docker login registry.gitlab.com -u votingly-deploy-token --password-stdin <<< $(docker run google/cloud-sdk:alpine gcloud secrets versions access latest --secret="GITLAB_DEPLOY_TOKEN" --project votingly)
 
 # Run docker compose with HTTPS Portal and Web App
 mkdir ~/https-portal
