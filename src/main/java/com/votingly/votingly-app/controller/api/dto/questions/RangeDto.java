@@ -1,5 +1,6 @@
 package com.votingly.votingly-app.controller.api.dto.questions;
 
+import com.votingly.votingly-app.model.Survey;
 import com.votingly.votingly-app.model.question.QuestionType;
 import com.votingly.votingly-app.model.question.RangeQuestion;
 
