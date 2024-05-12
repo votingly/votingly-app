@@ -5,6 +5,8 @@ import com.votingly.votingly-app.model.answers.ChoiceAnswer;
 import com.votingly.votingly-app.model.answers.OpenAnswer;
 import com.votingly.votingly-app.model.answers.RangeAnswer;
 import com.votingly.votingly-app.model.question.ChoiceQuestion;
+import com.votingly.votingly-app.model.question.Question;
+import com.votingly.votingly-app.model.question.QuestionType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-//@ActiveProfiles("test")
+@ActiveProfiles("test")
 class AnswersControllerTest {
     @Autowired
     private MockMvc mockMvc;
@@ -76,7 +78,7 @@ class AnswersControllerTest {
                                List.of(new Option(1, "option 1", new ChoiceQuestion()))
                         ))))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.options").isArray())
+                .andExpect(jsonPath("$.options_answer").isArray())
                 .andDo(print())
                 .andReturn();
     }
