@@ -4,6 +4,7 @@ import com.votingly.votingly-app.controller.api.dto.questions.OptionDto;
 import com.votingly.votingly-app.controller.api.dto.questions.ChoiceDto;
 import com.votingly.votingly-app.controller.api.dto.questions.QuestionDto;
 import com.votingly.votingly-app.controller.api.dto.questions.RangeDto;
+import com.votingly.votingly-app.model.Survey;
 import com.votingly.votingly-app.model.question.ChoiceQuestion;
 import com.votingly.votingly-app.model.question.Question;
 import com.votingly.votingly-app.model.question.RangeQuestion;
@@ -26,11 +27,11 @@ public class QuestionDtoConverter {
         return dto;
     }
 
-    // public Question convertFromDto(QuestionDto dto) {
-    //     Question question = new Question(dto.getQuestionId(), dto.getQuestionName(), dto.getQuestionType());
-    //     question.setSurveyId(dto.getSurveyId());
-
-    // }
+    public Question convertFromDto(QuestionDto dto, Survey survey) {
+        Question question = new Question(dto.getId(), dto.getQuestionName(), dto.getQuestionType());
+        question.setSurvey(survey);
+        return question;
+    }
 
     private ChoiceDto convertChoiceQuestion(ChoiceQuestion question) {
         ChoiceDto choiceDto = new ChoiceDto(question);

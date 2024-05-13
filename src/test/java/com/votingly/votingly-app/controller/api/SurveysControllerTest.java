@@ -23,35 +23,23 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.votingly.votingly-app.controller.api.dto.SurveyDto;
 import com.votingly.votingly-app.controller.api.dto.questions.QuestionDto;
 import com.votingly.votingly-app.model.SurveyType;
+import com.votingly.votingly-app.model.question.QuestionType;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 class SurveysControllerTest {
     @Autowired
     private MockMvc mockMvc;
-    // private final Logger logger;
-
     @Autowired
     private ObjectMapper objectMapper;
-    // @Autowired
-    // public SurveysControllerTest(Logger logger) {
-    //     this.logger = logger;
-    // }
 
-    // @Test
-    // public void getAllSurveysShouldReturnListOfSurveysNames() throws Exception {
-    //     // logger.info("Active profiles:");
-    //     // logger.info(System.getProperty("spring.profiles.active"));
-    //     // logger.info(System.getProperty("SPRING_PROFILES_ACTIVE"));
-    //     // System.out.println("Active profiles:");
-    //     // System.out.println(System.getProperty("spring.profiles.active"));
-    //     // System.out.println(System.getProperty("SPRING_PROFILES_ACTIVE"));
-
-    //     mockMvc.perform(
-    //             get("/api/surveys")
-    //                     .accept(MediaType.APPLICATION_JSON)
-    //     ).andDo(print());
-    // }
+    @Test
+    public void getAllSurveysShouldReturnListOfSurveysNames() throws Exception {
+        mockMvc.perform(
+                get("/api/surveys")
+                        .accept(MediaType.APPLICATION_JSON)
+        ).andDo(print());
+    }
 
     @Test
     public void getQuestionsOfSurveyShouldReturnNoContentIfEmpty() throws Exception {
@@ -69,23 +57,24 @@ class SurveysControllerTest {
                 .andDo(print());
     }
     
-    // @Test
-    // public void shouldSaveSurveyAndQuestions() throws Exception {
-    //     SurveyDto surveyDto = new SurveyDto();
-    //     surveyDto.setSurveyName("SurveyName");
-    //     surveyDto.setSurveyType(SurveyType.CIRCULAR);
-    //     surveyDto.setStartDate(Date.valueOf(LocalDate.now()));
-    //     surveyDto.setEndDate(Date.valueOf(LocalDate.now()));
-    //     // QuestionDto questionDto = new QuestionDto();
-    //     // List<QuestionDto> questions = List.of(questionDto);
-    //     // surveyDto.setQuestions(questions);
-    //     mockMvc.perform(post("/api/surveys/create")
-    //             .contentType(MediaType.APPLICATION_JSON)
-    //             .accept(MediaType.APPLICATION_JSON)
-    //             .with(csrf())
-    //             .content(objectMapper.writeValueAsString(surveyDto)))
-    //         .andExpect(status().isCreated())
-    //         .andDo(print())
-    //         .andReturn();
-    // }
+    @Test
+    public void shouldSaveSurveyAndQuestions() throws Exception {
+        SurveyDto surveyDto = new SurveyDto();
+        surveyDto.setSurveyName("SurveyName");
+        surveyDto.setSurveyType(SurveyType.CIRCULAR);
+        surveyDto.setStartDate(Date.valueOf(LocalDate.now()));
+        surveyDto.setEndDate(Date.valueOf(LocalDate.now()));
+        QuestionDto question1 = new QuestionDto("whats up", QuestionType.OPEN);
+        QuestionDto question2 = new QuestionDto("whats down", QuestionType.OPEN);
+        List<QuestionDto> questions = List.of(question1,question2);
+        surveyDto.setQuestions(questions);
+        mockMvc.perform(post("/api/surveys/create")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .with(csrf())
+                .content(objectMapper.writeValueAsString(surveyDto)))
+            .andExpect(status().isCreated())
+            .andDo(print())
+            .andReturn();
+    }
 }
