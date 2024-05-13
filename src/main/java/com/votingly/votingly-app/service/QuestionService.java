@@ -1,5 +1,6 @@
 package com.votingly.votingly-app.service;
 
+import com.votingly.votingly-app.model.Survey;
 import com.votingly.votingly-app.model.question.Question;
 import com.votingly.votingly-app.repositories.QuestionsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +29,15 @@ public class QuestionService {
     @Transactional
     public List<Question> findAllQuestionById(long id) {
         return questionsRepository.findAllBySurveyIdFetched(id);
+    }
+
+    public void addQuestions(List<Question> questions) {
+        for (Question question : questions) {
+            questionsRepository.insertQuestion(question.getQuestionName(), question.getQuestionType().toString(), question.getSurvey().getSurveyId());
+        }
+    }
+
+    public List<Question> getQuestionsBySurvey(Survey survey) {
+        return questionsRepository.getQuestionsBySurvey(survey);
     }
 }

@@ -6,6 +6,7 @@ import com.votingly.votingly-app.controller.api.dto.questions.QuestionDto;
 import com.votingly.votingly-app.controller.api.dto.questions.RangeDto;
 import com.votingly.votingly-app.model.question.ChoiceQuestion;
 import com.votingly.votingly-app.model.question.Question;
+import com.votingly.votingly-app.model.question.QuestionType;
 import com.votingly.votingly-app.model.question.RangeQuestion;
 
 import java.util.stream.Collectors;

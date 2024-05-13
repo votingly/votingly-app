@@ -1,0 +1,69 @@
+package com.votingly.votingly-app.viewmodel;
+
+import com.votingly.votingly-app.model.Survey;
+import com.votingly.votingly-app.model.SurveyType;
+import com.votingly.votingly-app.model.question.Question;
+
+import java.util.List;
+import java.util.Optional;
+
+public class SurveyViewModel {
+    private Long id;
+    private String title;
+    private SurveyType type;
+    private List<Question> questions;  // Assuming QuestionViewModel is already defined
+
+    // Constructors, Getters, and Setters
+    public SurveyViewModel() {
+    }
+
+    public SurveyViewModel(Long id, String title, SurveyType type, List<Question> questions) {
+        this.id = id;
+        this.title = title;
+        this.type = type;
+        this.questions = questions;
+    }
+
+    public static SurveyViewModel fromDomain(final Survey survey) {
+        return new SurveyViewModel(
+                survey.getSurveyId(),
+                survey.getSurveyName(),
+                survey.getSurveyType(),
+                survey.getQuestions()
+        );
+    }
+
+    // Standard getters and setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public SurveyType getType() {
+        return type;
+    }
+
+    public void setType(SurveyType type){
+        this.type = type;
+    }
+
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
+    }
+}
+
