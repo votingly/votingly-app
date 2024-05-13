@@ -1,6 +1,7 @@
 package com.votingly.votingly-app.controller.api.dto.user;
 
 import com.votingly.votingly-app.model.Survey;
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Transient;
 
 import java.util.List;
