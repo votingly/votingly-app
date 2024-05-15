@@ -6,6 +6,7 @@ import com.votingly.votingly-app.converters.QuestionDtoConverter;
 import com.votingly.votingly-app.converters.SurveyDtoConverter;
 import com.votingly.votingly-app.model.Survey;
 import com.votingly.votingly-app.model.question.Question;
+import com.votingly.votingly-app.model.question.QuestionType;
 import com.votingly.votingly-app.service.QuestionService;
 import com.votingly.votingly-app.service.SurveyService;
 import org.modelmapper.ModelMapper;
@@ -14,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -62,12 +64,62 @@ public class SurveysController {
         Survey survey = surveyDtoConverter.convertFromDto(surveyDto);
         Survey createdSurvey = surveyService.createSurvey(survey);
         SurveyDto createdSurveyDto = modelMapper.map(createdSurvey, SurveyDto.class);
-        List<Question> questions = surveyDto.getQuestions().stream()
-                .map(questionDto -> questionDtoConverter.convertFromDto(questionDto, createdSurvey))
-                .toList();
+        List<Question> questions = surveyDto.getQuestions();
         for (Question question : questions) {
-            questionService.saveQuestion(question);
+            question.setSurvey(createdSurvey);
+            // questionService.createQuestion(question);
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(createdSurveyDto);
     }
+
+    @PostMapping
+    public ResponseEntity<SurveyDto> addSurvey(
+            @RequestBody SurveyDto surveyDto
+    ) {
+        Survey survey = modelMapper.map(surveyDto, Survey.class);
+        List<Question> questions = new ArrayList<>();
+        for (QuestionDto questionDto: surveyDto.getQuestions()) {
+            Question question = new Question(
+                    questionDto.getQuestionName(),
+                    questionDto.getQuestionType()
+            );
+
+            // Infer isMultiChoice based on questionType
+            boolean isMultiChoice = question.getQuestionType() == QuestionType.CHOICE;
+
+            questions.add(question);
+        }
+        surveyService.addSurvey(survey);
+        questions.forEach(question -> question.setSurvey(survey));
+        questionService.addQuestions(questions);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(surveyDto);
+    }
+
+
+    @GetMapping("/{id}/details")
+    public ResponseEntity<SurveyDto> getSurveyDetails(@PathVariable("id") long id) {
+        Survey survey = surveyService.getSurvey(id);
+        List<Question> questions = questionService.getQuestionsBySurvey(survey);
+        List<QuestionDto> questionDtos = questions.stream()
+                .map(question -> modelMapper.map(question, QuestionDto.class))
+                .toList();
+//        survey.setQuestions(questions);
+        SurveyDto surveyDto = new SurveyDto(
+                survey.getSurveyName(),
+                survey.getSurveyType(),
+                questionDtos
+        );
+        return ResponseEntity.ok(surveyDto);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteSurvey(
+            @PathVariable("id") final long id
+    ) {
+        surveyService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
+
 }

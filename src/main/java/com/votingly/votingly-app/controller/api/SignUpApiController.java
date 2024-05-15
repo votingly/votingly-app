@@ -2,7 +2,6 @@ package com.votingly.votingly-app.controller.api;
 
 import com.votingly.votingly-app.controller.api.dto.user.RegularUserDto;
 import com.votingly.votingly-app.controller.api.dto.user.UserDto;
-import com.votingly.votingly-app.model.user.RegularUser;
 import com.votingly.votingly-app.service.UserService;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
