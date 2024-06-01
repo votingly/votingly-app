@@ -1,20 +1,28 @@
 package com.votingly.votingly-app.service;
 
+import com.votingly.votingly-app.model.Survey;
+import com.votingly.votingly-app.model.answers.Answer;
+import com.votingly.votingly-app.model.answers.OpenAnswer;
+import com.votingly.votingly-app.model.question.ChoiceQuestion;
 import com.votingly.votingly-app.model.question.Question;
+import com.votingly.votingly-app.repositories.OptionRepository;
 import com.votingly.votingly-app.repositories.QuestionsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
 public class QuestionService {
     private final QuestionsRepository questionsRepository;
+    private final OptionRepository optionRepository;
 
     @Autowired
-    public QuestionService(QuestionsRepository questionsRepository) {
+    public QuestionService(QuestionsRepository questionsRepository, OptionRepository optionRepository) {
         this.questionsRepository = questionsRepository;
+        this.optionRepository = optionRepository;
     }
     @Transactional
     public List<Question> getAllQuestions() {
@@ -28,5 +36,30 @@ public class QuestionService {
     @Transactional
     public List<Question> findAllQuestionById(long id) {
         return questionsRepository.findAllBySurveyIdFetched(id);
+    }
+
+    public void addQuestions(List<Question> questions) {
+        for (Question question : questions) {
+            questionsRepository.insertQuestion(question.getQuestionName(), question.getQuestionType().toString(), question.getSurvey().getSurveyId());
+        }
+    }
+
+    public List<Question> getQuestionsBySurvey(Survey survey) {
+        return questionsRepository.getQuestionsBySurvey(survey);
+    }
+
+    @Transactional
+    public Question saveQuestion(Question question) {
+        return questionsRepository.save(question);
+    }
+
+    public void deleteQuestionsBySurvey(Survey survey) {
+        List<Question> questions = questionsRepository.getQuestionsBySurvey(survey);
+        for (Question question : questions) {
+            if (question.getClass().equals(ChoiceQuestion.class)) {
+                optionRepository.deleteByQuestion(question);
+            }
+            questionsRepository.delete(question);
+        }
     }
 }
