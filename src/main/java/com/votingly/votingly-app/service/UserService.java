@@ -1,6 +1,7 @@
 package com.votingly.votingly-app.service;
 
 import com.votingly.votingly-app.model.user.RegularUser;
+import com.votingly.votingly-app.model.user.Supervisor;
 import com.votingly.votingly-app.model.user.User;
 import com.votingly.votingly-app.repositories.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -44,6 +45,17 @@ public class UserService {
         user.setLastName(lastName);
         user.setEmail(email);
         user.setPassword(password);
+
+        return userRepository.save(user);
+    }
+
+    public Supervisor addSupervisor(String firstName, String lastName, String email, String password) {
+        Supervisor user = new Supervisor();
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setEmail(email);
+        user.setPassword(password);
+        user.setUserType("SUPERVISOR");
 
         return userRepository.save(user);
     }
