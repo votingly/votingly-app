@@ -1,5 +1,6 @@
 package com.votingly.votingly-app.service;
 
+import com.votingly.votingly-app.controller.api.dto.questions.OptionDto;
 import com.votingly.votingly-app.model.Option;
 import com.votingly.votingly-app.model.answers.Answer;
 import com.votingly.votingly-app.model.answers.ChoiceAnswer;
