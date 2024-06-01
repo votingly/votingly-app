@@ -2,9 +2,7 @@ package com.votingly.votingly-app.controller.api.dto.answer;
 
 import com.votingly.votingly-app.model.Option;
 
-
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
 
 public class NewAnswerDto {
