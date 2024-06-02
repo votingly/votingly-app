@@ -20,8 +20,8 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import com.votingly.votingly-app.controller.api.dto.SurveyDto;
 import com.votingly.votingly-app.controller.api.dto.questions.QuestionDto;
+import com.votingly.votingly-app.controller.api.dto.survey.SurveyDto;
 import com.votingly.votingly-app.model.SurveyType;
 import com.votingly.votingly-app.model.question.QuestionType;
 

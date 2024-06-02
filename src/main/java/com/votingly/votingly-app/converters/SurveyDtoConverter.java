@@ -1,7 +1,7 @@
 package com.votingly.votingly-app.converters;
 
-import com.votingly.votingly-app.controller.api.dto.SurveyDto;
 import com.votingly.votingly-app.controller.api.dto.questions.QuestionDto;
+import com.votingly.votingly-app.controller.api.dto.survey.SurveyDto;
 import com.votingly.votingly-app.model.Survey;
 import com.votingly.votingly-app.model.question.ChoiceQuestion;
 import com.votingly.votingly-app.model.question.RangeQuestion;

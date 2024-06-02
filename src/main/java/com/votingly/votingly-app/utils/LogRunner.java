@@ -1,4 +1,4 @@
-package com.votingly.votingly-app.config;
+package com.votingly.votingly-app.utils;
 
 import org.springframework.boot.CommandLineRunner;
 
