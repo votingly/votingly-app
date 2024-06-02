@@ -1,12 +1,16 @@
 package com.votingly.votingly-app.service;
 
+import com.votingly.votingly-app.model.Option;
 import com.votingly.votingly-app.model.Survey;
 import com.votingly.votingly-app.model.question.ChoiceQuestion;
 import com.votingly.votingly-app.model.question.OpenQuestion;
 import com.votingly.votingly-app.model.question.Question;
+import com.votingly.votingly-app.model.question.QuestionType;
 import com.votingly.votingly-app.model.question.RangeQuestion;
 import com.votingly.votingly-app.repositories.OptionRepository;
 import com.votingly.votingly-app.repositories.QuestionsRepository;
+
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,11 +22,15 @@ import java.util.List;
 public class QuestionService {
     private final QuestionsRepository questionsRepository;
     private final OptionRepository optionRepository;
+    private final OptionService optionService;
+    private final Logger logger;
 
     @Autowired
-    public QuestionService(QuestionsRepository questionsRepository, OptionRepository optionRepository) {
+    public QuestionService(QuestionsRepository questionsRepository, OptionRepository optionRepository, OptionService optionService, Logger logger) {
         this.questionsRepository = questionsRepository;
         this.optionRepository = optionRepository;
+        this.optionService = optionService;
+        this.logger = logger;
     }
 
     public List<Question> getAllQuestions() {
@@ -37,39 +45,21 @@ public class QuestionService {
         return questionsRepository.findAllBySurveyIdFetched(id);
     }
 
-//    public void addQuestions(List<Question> questions) {
-//        for (Question question : questions) {
-//            questionsRepository.insertQuestions(question.getQuestionName(), question.getQuestionType().toString(), question.getSurvey().getSurveyId());
-//        }
-//    }
     public void addQuestions(List<Question> questions) {
         for (Question question : questions) {
-            if (question instanceof ChoiceQuestion choiceQuestion) {
-                questionsRepository.insertChoiceQuestion(
-                        choiceQuestion.getQuestionName(),
-                        choiceQuestion.getQuestionType().toString(),
-                        choiceQuestion.getSurvey().getSurveyId(),
-                        choiceQuestion.isMultiChoice()
-                );
-            } else if (question instanceof RangeQuestion rangeQuestion) {
-                questionsRepository.insertRangeQuestion(
-                        rangeQuestion.getQuestionName(),
-                        rangeQuestion.getQuestionType().toString(),
-                        rangeQuestion.getSurvey().getSurveyId(),
-                        rangeQuestion.getMin(),
-                        rangeQuestion.getMax(),
-                        rangeQuestion.getStep()
-                );
-            } else if (question instanceof OpenQuestion openQuestion) {
-                questionsRepository.insertQuestions(
-                        openQuestion.getQuestionName(),
-                        openQuestion.getQuestionType().toString(),
-                        openQuestion.getSurvey().getSurveyId()
-                );
+            if (question.getQuestionType() == QuestionType.CHOICE) {
+                ChoiceQuestion choiceQuestion = (ChoiceQuestion) question;
+                questionsRepository.save(choiceQuestion);
+                optionService.addOptions(choiceQuestion.getOptions());
+            } else {
+                questionsRepository.save(question);
             }
         }
     }
-
+    
+    public void addQuestion(Question question) {
+        questionsRepository.save(question);
+    }
 
     public List<Question> getQuestionsBySurvey(Survey survey) {
         return questionsRepository.getQuestionsBySurvey(survey);
@@ -84,4 +74,5 @@ public class QuestionService {
             questionsRepository.delete(question);
         }
     }
+
 }
