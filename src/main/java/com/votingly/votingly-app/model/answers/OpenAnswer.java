@@ -1,11 +1,10 @@
 package com.votingly.votingly-app.model.answers;
 
 import com.votingly.votingly-app.model.question.Question;
-import jakarta.persistence.Entity;
 import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 @Entity
 @DiscriminatorValue("OPEN")
