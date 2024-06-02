@@ -1,11 +1,10 @@
-package com.votingly.votingly-app.viewmodel;
+package com.votingly.votingly-app.controller.mvc.viewmodel;
 
 import com.votingly.votingly-app.model.Survey;
 import com.votingly.votingly-app.model.SurveyType;
 import com.votingly.votingly-app.model.question.Question;
 
 import java.util.List;
-import java.util.Optional;
 
 public class SurveyViewModel {
     private Long id;
