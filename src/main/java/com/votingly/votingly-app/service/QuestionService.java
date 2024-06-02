@@ -1,8 +1,6 @@
 package com.votingly.votingly-app.service;
 
 import com.votingly.votingly-app.model.Survey;
-import com.votingly.votingly-app.model.answers.Answer;
-import com.votingly.votingly-app.model.answers.OpenAnswer;
 import com.votingly.votingly-app.model.question.ChoiceQuestion;
 import com.votingly.votingly-app.model.question.Question;
 import com.votingly.votingly-app.repositories.OptionRepository;
@@ -11,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -25,9 +22,11 @@ public class QuestionService {
         this.questionsRepository = questionsRepository;
         this.optionRepository = optionRepository;
     }
+
     public List<Question> getAllQuestions() {
         return questionsRepository.findAllQuestions();
     }
+
     public Question getQuestion(long id) {
         return questionsRepository.findById(id).orElse(null);
     }
@@ -45,6 +44,7 @@ public class QuestionService {
     public List<Question> getQuestionsBySurvey(Survey survey) {
         return questionsRepository.getQuestionsBySurvey(survey);
     }
+
 
     public void deleteQuestionsBySurvey(Survey survey) {
         List<Question> questions = questionsRepository.getQuestionsBySurvey(survey);

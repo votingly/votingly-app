@@ -1,6 +1,5 @@
 package com.votingly.votingly-app.repositories;
 
-// import com.votingly.votingly-app.model.answers.Answer;
 import com.votingly.votingly-app.model.Survey;
 import com.votingly.votingly-app.model.question.Question;
 import jakarta.transaction.Transactional;
@@ -16,8 +15,8 @@ public interface QuestionsRepository extends JpaRepository<Question, Long>, Find
     @Query("SELECT questions FROM Question questions")
     List<Question> findAllQuestions();
 
-
     List<Question> getQuestionsBySurvey(Survey survey);
+
 
     @Modifying
     @Transactional
