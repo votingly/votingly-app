@@ -1,26 +1,27 @@
 package com.votingly.votingly-app.controller.api;
 
 import com.votingly.votingly-app.controller.api.dto.SurveyDto;
+import com.votingly.votingly-app.controller.api.dto.questions.ChoiceDto;
 import com.votingly.votingly-app.controller.api.dto.questions.QuestionDto;
+import com.votingly.votingly-app.controller.api.dto.questions.RangeDto;
 import com.votingly.votingly-app.converters.QuestionDtoConverter;
 import com.votingly.votingly-app.converters.SurveyDtoConverter;
+import com.votingly.votingly-app.model.Option;
 import com.votingly.votingly-app.model.Survey;
+import com.votingly.votingly-app.model.question.ChoiceQuestion;
 import com.votingly.votingly-app.model.question.Question;
-import com.votingly.votingly-app.model.question.QuestionType;
+import com.votingly.votingly-app.model.question.RangeQuestion;
 import com.votingly.votingly-app.service.QuestionService;
 import com.votingly.votingly-app.service.SurveyService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/surveys")
@@ -62,21 +63,63 @@ public class SurveysController {
         return ResponseEntity.ok(questionDtos);
     }
 
+//    @PostMapping
+//    public ResponseEntity<SurveyDto> addSurvey(
+//            @RequestBody SurveyDto surveyDto
+//    ) {
+//        Survey survey = modelMapper.map(surveyDto, Survey.class);
+//        List<Question> questions = new ArrayList<>();
+//        for (QuestionDto questionDto : surveyDto.getQuestions()) {
+//            Question question = new Question(
+//                    questionDto.getQuestionName(),
+//                    questionDto.getQuestionType()
+//            );
+//
+//            // Infer isMultiChoice based on questionType
+//            boolean isMultiChoice = question.getQuestionType() == QuestionType.CHOICE;
+//
+//            questions.add(question);
+//        }
+//        surveyService.addSurvey(survey);
+//        questions.forEach(question -> question.setSurvey(survey));
+//        questionService.addQuestions(questions);
+//
+//        return ResponseEntity.status(HttpStatus.CREATED).body(surveyDto);
+//    }
+
     @PostMapping
-    public ResponseEntity<SurveyDto> addSurvey(
-            @RequestBody SurveyDto surveyDto
-    ) {
+    public ResponseEntity<SurveyDto> addSurvey(@RequestBody SurveyDto surveyDto) {
         Survey survey = modelMapper.map(surveyDto, Survey.class);
         List<Question> questions = new ArrayList<>();
+
         for (QuestionDto questionDto : surveyDto.getQuestions()) {
-            Question question = new Question(
-                    questionDto.getQuestionName(),
-                    questionDto.getQuestionType()
-            );
-
-            // Infer isMultiChoice based on questionType
-            boolean isMultiChoice = question.getQuestionType() == QuestionType.CHOICE;
-
+            Question question;
+            if (questionDto instanceof ChoiceDto choiceDto) {
+                question = new ChoiceQuestion(
+                        questionDto.getId(),
+                        questionDto.getQuestionName(),
+                        questionDto.getQuestionType(),
+                        choiceDto.isMultiChoice(),
+                        choiceDto.getOptions().stream()
+                                .map(optionDto -> new Option(optionDto.getOptionId(), optionDto.getOptionText()))
+                                .collect(Collectors.toList())
+                );
+            } else if (questionDto instanceof RangeDto rangeDto) {
+                question = new RangeQuestion(
+                        questionDto.getId(),
+                        questionDto.getQuestionName(),
+                        questionDto.getQuestionType(),
+                        rangeDto.getMin(),
+                        rangeDto.getMax(),
+                        rangeDto.getStep()
+                );
+            } else {
+                question = new Question(
+                        questionDto.getId(),
+                        questionDto.getQuestionName(),
+                        questionDto.getQuestionType()
+                );
+            }
             questions.add(question);
         }
         surveyService.addSurvey(survey);
