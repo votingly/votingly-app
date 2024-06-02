@@ -1,6 +1,7 @@
 package com.votingly.votingly-app.model;
 
 import com.votingly.votingly-app.model.answers.ChoiceAnswer;
+// import com.votingly.votingly-app.model.answers.ChoiceAnswer;
 import com.votingly.votingly-app.model.question.ChoiceQuestion;
 import jakarta.persistence.*;
 
@@ -9,6 +10,7 @@ import jakarta.persistence.*;
 public class Option {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "option_id")
     private long optionId;
 
     @Column(name = "option_text")
@@ -18,9 +20,9 @@ public class Option {
     @JoinColumn(name = "question", nullable = false)
     private ChoiceQuestion question;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "options_answer")
-    private ChoiceAnswer answer;
+    // @OneToOne(mappedBy = "option")
+    // @PrimaryKeyJoinColumn
+    // private ChoiceAnswer answer;
 
     public Option() {
     }
