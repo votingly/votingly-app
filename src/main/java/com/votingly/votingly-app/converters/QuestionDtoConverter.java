@@ -1,33 +1,14 @@
 package com.votingly.votingly-app.converters;
 
-import com.votingly.votingly-app.controller.api.dto.questions.OptionDto;
-import com.votingly.votingly-app.controller.api.dto.questions.ChoiceDto;
-import com.votingly.votingly-app.controller.api.dto.questions.QuestionDto;
-import com.votingly.votingly-app.controller.api.dto.questions.QuestionDtoIn;
-import com.votingly.votingly-app.controller.api.dto.questions.RangeDto;
+import com.votingly.votingly-app.controller.api.dto.questions.*;
 import com.votingly.votingly-app.model.Option;
 import com.votingly.votingly-app.model.Survey;
-import com.votingly.votingly-app.model.question.ChoiceQuestion;
-import com.votingly.votingly-app.model.question.OpenQuestion;
-import com.votingly.votingly-app.model.question.Question;
-import com.votingly.votingly-app.model.question.QuestionType;
-import com.votingly.votingly-app.model.question.RangeQuestion;
-import com.votingly.votingly-app.service.OptionService;
+import com.votingly.votingly-app.model.question.*;
 
 import java.util.List;
-import java.util.Map;
-import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 public class QuestionDtoConverter {
-    // private final OptionService optionService;
-
-    // @Autowired
-    // public QuestionDtoConverter(OptionService optionService) {
-    //     this.optionService = optionService;
-    // }
 
     public QuestionDto convert(Question question) {
 

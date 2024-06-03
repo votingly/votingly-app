@@ -4,7 +4,7 @@ import com.votingly.votingly-app.model.Survey;
 import com.votingly.votingly-app.model.question.Question;
 import com.votingly.votingly-app.service.SurveyService;
 import com.votingly.votingly-app.service.QuestionService;
-import com.votingly.votingly-app.viewmodel.SurveyViewModel;
+import com.votingly.votingly-app.controller.mvc.viewmodel.SurveyViewModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
