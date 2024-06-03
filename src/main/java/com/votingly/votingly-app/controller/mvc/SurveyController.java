@@ -4,6 +4,7 @@ import com.votingly.votingly-app.model.Survey;
 import com.votingly.votingly-app.model.question.Question;
 import com.votingly.votingly-app.service.SurveyService;
 import com.votingly.votingly-app.service.QuestionService;
+
 import com.votingly.votingly-app.controller.mvc.viewmodel.SurveyViewModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -55,7 +56,7 @@ public class SurveyController {
     public String surveyDetails(@PathVariable("id") long id, Model model) {
         final Survey survey = surveyService.getSurvey(id);
         final List<Question> questions = questionService.getQuestionsBySurvey(survey);
-        survey.setQuestions(questions);
+//        survey.setQuestions(questions);
         final SurveyViewModel viewModel = SurveyViewModel.fromDomain(survey);
         model.addAttribute("survey", viewModel);
         return "surveydetails";

@@ -1,0 +1,46 @@
+package com.votingly.votingly-app.controller.api.dto;
+
+import com.votingly.votingly-app.controller.api.dto.questions.QuestionDto;
+import com.votingly.votingly-app.controller.api.dto.questions.QuestionDtoIn;
+import com.votingly.votingly-app.model.SurveyType;
+import com.votingly.votingly-app.model.question.Question;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+
+import java.util.List;
+
+public class UpdatedSurveyDto {
+    private String surveyName;
+    private SurveyType surveyType;
+    private List<QuestionDtoIn> questions;
+
+    public UpdatedSurveyDto(String surveyName, SurveyType surveyType, List<QuestionDtoIn> questions) {
+        this.surveyName = surveyName;
+        this.surveyType = surveyType;
+        this.questions = questions;
+    }
+
+    public String getSurveyName() {
+        return surveyName;
+    }
+
+    public void setSurveyName(String surveyName) {
+        this.surveyName = surveyName;
+    }
+
+    public SurveyType getSurveyType() {
+        return surveyType;
+    }
+
+    public void setSurveyType(SurveyType surveyType) {
+        this.surveyType = surveyType;
+    }
+
+    public List<QuestionDtoIn> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<QuestionDtoIn> questions) {
+        this.questions = questions;
+    }
+}
