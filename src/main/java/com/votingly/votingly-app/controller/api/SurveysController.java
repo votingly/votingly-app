@@ -9,6 +9,7 @@ import com.votingly.votingly-app.model.Survey;
 import com.votingly.votingly-app.model.question.Question;
 import com.votingly.votingly-app.service.QuestionService;
 import com.votingly.votingly-app.service.SurveyService;
+import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,6 +75,19 @@ public class SurveysController {
         return ResponseEntity.status(HttpStatus.CREATED).body(surveyDto);
     }
 
+    @PatchMapping("{id}")
+    ResponseEntity<Void> changeSurvey(@PathVariable("id") long surveyId,
+                                      @RequestBody @Valid SurveyDtoIn updatedSurveyDto) {
+        Survey survey = modelMapper.map(surveyId, Survey.class);
+        List<Question> questions = updatedSurveyDto.getQuestions().stream()
+                .map(questionDtoIn -> questionDtoConverter.convertFromDtoIn(questionDtoIn, survey)).toList();
+
+        questionService.updateQuestions(surveyId, questions, updatedSurveyDto.getSurveyName());
+        surveyService.changeSurveyInfo(surveyId, updatedSurveyDto.getSurveyName(), updatedSurveyDto.getSurveyType());
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
     @GetMapping("/{id}/details")
     public ResponseEntity<SurveyDto> getSurveyDetails(@PathVariable("id") long id) {
         Survey survey = surveyService.getSurvey(id);
@@ -100,4 +114,12 @@ public class SurveysController {
         surveyService.delete(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping("/{id}/supervisor")
+    public String saveNote(@RequestBody String note, @PathVariable("id") long id) {
+        logger.info(note);
+        surveyService.addNoteToSurvey(id, note);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).toString();
+    }
+
 }
