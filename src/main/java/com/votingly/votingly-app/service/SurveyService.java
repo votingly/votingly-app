@@ -1,6 +1,5 @@
 package com.votingly.votingly-app.service;
 
-import com.votingly.votingly-app.controller.api.dto.UpdatedSurveyDto;
 import com.votingly.votingly-app.controller.api.dto.questions.QuestionDtoIn;
 import com.votingly.votingly-app.model.Note;
 import com.votingly.votingly-app.model.Option;
