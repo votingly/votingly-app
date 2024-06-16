@@ -1,40 +1,31 @@
 package com.votingly.votingly-app.service;
 
-import com.votingly.votingly-app.controller.api.dto.questions.QuestionDtoIn;
 import com.votingly.votingly-app.model.Note;
-import com.votingly.votingly-app.model.Option;
-import com.votingly.votingly-app.controller.api.dto.questions.UpdateQuestionDto;
-import com.votingly.votingly-app.converters.QuestionDtoConverter;
 import com.votingly.votingly-app.model.Survey;
 import com.votingly.votingly-app.model.SurveyType;
-import com.votingly.votingly-app.model.question.ChoiceQuestion;
 import com.votingly.votingly-app.model.question.Question;
-import com.votingly.votingly-app.model.question.QuestionType;
-import com.votingly.votingly-app.repositories.FindAllQuestionBySurveyId;
 import com.votingly.votingly-app.repositories.NoteRepository;
+import com.votingly.votingly-app.repositories.QuestionsRepository;
 import com.votingly.votingly-app.repositories.SurveyRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
 public class SurveyService {
 
     private final SurveyRepository surveyRepository;
+    private final QuestionsRepository questionsRepository;
     private final NoteRepository noteRepository;
 
     @Autowired
-    public SurveyService(SurveyRepository surveyRepository, NoteRepository noteRepository) {
+    public SurveyService(SurveyRepository surveyRepository, QuestionsRepository questionsRepository, NoteRepository noteRepository) {
         this.surveyRepository = surveyRepository;
+        this.questionsRepository = questionsRepository;
         this.noteRepository = noteRepository;
     }
 
@@ -51,10 +42,6 @@ public class SurveyService {
         return surveyRepository.getQuestionIdsBySurveyId(id);
     }
 
-    public Survey createSurvey(Survey survey) {
-        return surveyRepository.save(survey);
-    }
-
     public void addSurvey(Survey survey) {
         surveyRepository.save(survey);
     }
@@ -63,17 +50,31 @@ public class SurveyService {
         surveyRepository.deleteById(id);
     }
 
-    public Survey changeSurveyInfo(long surveyid, Survey survey) {
-        var surveyPresent = surveyRepository.findById(surveyid).orElse(null);
+    public boolean changeSurveyInfo(long surveyId, String newSurveyName, SurveyType newSurveyType, List<Question> newListQuestions) {
+        var surveyPresent = surveyRepository.findById(surveyId).orElse(null);
         if (surveyPresent == null) {
-            return null;
+            return false;
         }
-        surveyPresent.setSurveyName(survey.getSurveyName());
-        surveyPresent.setSurveyType(survey.getSurveyType());
 
+        surveyPresent.setSurveyName(newSurveyName);
+        surveyPresent.setSurveyType(newSurveyType);
+
+        List<Question> updatedQuestions = new ArrayList<>();
+        for (Question newQuestion : newListQuestions) {
+            Question existingQuestion = questionsRepository.findQuestionById(newQuestion.getId());
+            if (existingQuestion != null) {
+                existingQuestion.setQuestionName(newQuestion.getQuestionName());
+                updatedQuestions.add(existingQuestion);
+            } else {
+                updatedQuestions.add(newQuestion);
+            }
+        }
+
+        surveyPresent.setQuestions(updatedQuestions);
         surveyRepository.save(surveyPresent);
-        return surveyPresent;
+        return true;
     }
+
 
     public void addNoteToSurvey(Long id, String content) {
         Note note = new Note();
@@ -82,4 +83,5 @@ public class SurveyService {
         note.setContent(content);
         noteRepository.save(note);
     }
+
 }
