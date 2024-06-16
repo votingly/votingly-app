@@ -1,8 +1,6 @@
 package com.votingly.votingly-app.controller.api;
 
 import com.votingly.votingly-app.controller.api.dto.questions.QuestionDto;
-import com.votingly.votingly-app.controller.api.dto.questions.QuestionDtoIn;
-import com.votingly.votingly-app.controller.api.dto.questions.UpdateQuestionDto;
 import com.votingly.votingly-app.controller.api.dto.survey.SurveyDto;
 import com.votingly.votingly-app.controller.api.dto.survey.SurveyDtoIn;
 import com.votingly.votingly-app.controller.api.dto.survey.UpdateSurveyDto;
@@ -10,12 +8,9 @@ import com.votingly.votingly-app.converters.QuestionDtoConverter;
 import com.votingly.votingly-app.converters.SurveyDtoConverter;
 import com.votingly.votingly-app.model.Survey;
 import com.votingly.votingly-app.model.question.Question;
-import com.votingly.votingly-app.model.user.PlatformAdmin;
-import com.votingly.votingly-app.model.user.User;
 import com.votingly.votingly-app.security.CustomUserDetails;
 import com.votingly.votingly-app.service.QuestionService;
 import com.votingly.votingly-app.service.SurveyService;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
@@ -25,7 +20,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
-import javax.management.relation.Role;
 import java.util.List;
 import java.util.stream.Collectors;
 
