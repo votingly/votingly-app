@@ -9,16 +9,22 @@ import com.votingly.votingly-app.converters.QuestionDtoConverter;
 import com.votingly.votingly-app.converters.SurveyDtoConverter;
 import com.votingly.votingly-app.model.Survey;
 import com.votingly.votingly-app.model.question.Question;
+import com.votingly.votingly-app.model.user.PlatformAdmin;
+import com.votingly.votingly-app.model.user.User;
+import com.votingly.votingly-app.security.CustomUserDetails;
 import com.votingly.votingly-app.service.QuestionService;
 import com.votingly.votingly-app.service.SurveyService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import javax.management.relation.Role;
 import java.util.List;
 
 @RestController
@@ -65,7 +71,7 @@ public class SurveysController {
     }
 
     @PostMapping("/{id}/questions")
-    ResponseEntity<QuestionDto> changeQuestionsInForm(@PathVariable long id, @RequestBody @Valid UpdateQuestionDto questionDtoIn){
+    ResponseEntity<QuestionDto> changeQuestionsInForm(@PathVariable long id, @RequestBody @Valid UpdateQuestionDto questionDtoIn) {
         var survey = surveyService.getSurvey(id);
         Question question = questionDtoConverter.convertFromDtoIn(questionDtoIn, survey);
         Question savedQuestions = questionService.saveQuestion(question);
@@ -87,7 +93,7 @@ public class SurveysController {
 
     @PatchMapping("{id}")
     ResponseEntity<SurveyDto> changeSurvey(@PathVariable("id") long surveyId,
-                                      @RequestBody @Valid SurveyDto updatedSurveyDto) {
+                                           @RequestBody @Valid SurveyDto updatedSurveyDto) {
         Survey survey = surveyDtoConverter.convertFromDto(updatedSurveyDto);
 
         Survey updatedSurvey = surveyService.changeSurveyInfo(surveyId, survey);
@@ -95,7 +101,11 @@ public class SurveysController {
     }
 
     @GetMapping("/{id}/details")
-    public ResponseEntity<SurveyDto> getSurveyDetails(@PathVariable("id") long id) {
+    public ResponseEntity<SurveyDto> getSurveyDetails(@PathVariable("id") long id,
+                                                      @AuthenticationPrincipal CustomUserDetails user) {
+        if (user == null) {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
         Survey survey = surveyService.getSurvey(id);
         List<Question> questions = questionService.findAllQuestionById(id);
         List<QuestionDto> questionDtos = questions.stream()
