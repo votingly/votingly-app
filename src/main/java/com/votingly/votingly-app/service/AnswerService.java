@@ -1,31 +1,31 @@
 package com.votingly.votingly-app.service;
 
-import com.votingly.votingly-app.controller.api.dto.questions.OptionDto;
 import com.votingly.votingly-app.model.Option;
 import com.votingly.votingly-app.model.answers.Answer;
 import com.votingly.votingly-app.model.answers.ChoiceAnswer;
 import com.votingly.votingly-app.model.answers.OpenAnswer;
-import com.votingly.votingly-app.model.question.Question;
 import com.votingly.votingly-app.model.answers.RangeAnswer;
+import com.votingly.votingly-app.model.question.Question;
 import com.votingly.votingly-app.repositories.AnswerRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
 
 @Service
 @Transactional
 public class AnswerService {
     private final AnswerRepository answerRepository;
-    // private final OptionService optionService;
 
     @Autowired
     public AnswerService(AnswerRepository answerRepository) {
         this.answerRepository = answerRepository;
+    }
+
+    public List<Answer> findAllAnswersBySurveyId(long id) {
+        return answerRepository.findAllBySurveyIds(id);
     }
 
     public Answer saveOpen(long surveyId, long userId, Question question, String answer, LocalDateTime answerTime) {
@@ -41,7 +41,6 @@ public class AnswerService {
     }
 
     public Answer saveChoice(long surveyId, long userId, Question question, long optionId, LocalDateTime answerTime) {
-        // Option option = optionService.getOption(optionId);
         var option = new Option(optionId, "option");
         var choiceAnswerEntity = new ChoiceAnswer(surveyId, userId, question, option, answerTime);
 
