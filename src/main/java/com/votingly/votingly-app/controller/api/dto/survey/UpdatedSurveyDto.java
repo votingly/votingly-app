@@ -1,11 +1,7 @@
-package com.votingly.votingly-app.controller.api.dto;
+package com.votingly.votingly-app.controller.api.dto.survey;
 
-import com.votingly.votingly-app.controller.api.dto.questions.QuestionDto;
 import com.votingly.votingly-app.controller.api.dto.questions.QuestionDtoIn;
 import com.votingly.votingly-app.model.SurveyType;
-import com.votingly.votingly-app.model.question.Question;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 
 import java.util.List;
 
