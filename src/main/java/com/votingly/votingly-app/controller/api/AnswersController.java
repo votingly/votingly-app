@@ -4,6 +4,7 @@ import com.votingly.votingly-app.controller.api.dto.answer.AnswerDto;
 import com.votingly.votingly-app.controller.api.dto.answer.NewAnswerDto;
 import com.votingly.votingly-app.converters.ChoiceAnswerDtoConverter;
 import com.votingly.votingly-app.model.answers.Answer;
+import com.votingly.votingly-app.model.answers.ChoiceAnswer;
 import com.votingly.votingly-app.model.answers.OpenAnswer;
 import com.votingly.votingly-app.model.answers.RangeAnswer;
 import com.votingly.votingly-app.model.question.Question;
@@ -123,6 +124,9 @@ public class AnswersController {
                         RangeAnswer rangeAnswer = (RangeAnswer) answer;
                         csvPrinter.printRecord(rangeAnswer.getAnswerId(), rangeAnswer.getSurveyId(), rangeAnswer.getUserId(), answerType, rangeAnswer.getRange_answer(), rangeAnswer.getAnswerTime());
                         break;
+                    case "ChoiceAnswer":
+                        ChoiceAnswer choiceAnswer = (ChoiceAnswer) answer;
+                        csvPrinter.printRecord(choiceAnswer.getAnswerId(), choiceAnswer.getSurveyId(), choiceAnswer.getoption().getOptionText());
                     // TODO: Add more cases for other types of answers
                     default:
                         break;
