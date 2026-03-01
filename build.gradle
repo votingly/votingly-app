@@ -65,7 +65,7 @@ hibernate {
 }
 
 bootBuildImage {
-    imageName = 'registry.gitlab.com/kdg-ti/integration-4/2023-2024/team-9/votingly/' + rootProject.name.toLowerCase() + ':' + version.toLowerCase()
+    imageName = 'votingly/' + rootProject.name.toLowerCase() + ':' + version.toLowerCase()
     cleanCache = true
     publish = true
 }
